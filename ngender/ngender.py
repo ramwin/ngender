@@ -64,8 +64,11 @@ class Guesser(object):
             if gender == 0 \
             else 1. * self.male_total / self.total
 
-        for char in firstname:
-            p *= self.freq.get(char, (0, 0))[gender]
+        if firstname in self.freq:
+            p *= self.freq.get(firstname, (0,0))[gender]
+        else:
+            for char in firstname:
+                p *= self.freq.get(char, (0, 0))[gender]
 
         return p
 
